@@ -1,8 +1,10 @@
 <script>
     const DOC_POLL_TIME = 1 * 1000; // in milliseconds
+    
+    var intervalId;
     $(function() {
         renderPreviewContents();
-        setInterval(renderPreviewContents, DOC_POLL_TIME);
+        pollAndUpdatePreview();
     });
 
     function renderPreviewContents() {
@@ -12,6 +14,10 @@
             .convertDocToMarkdown();
     }
 
+    function pollAndUpdatePreview() {
+        intervalId = setInterval(renderPreviewContents, DOC_POLL_TIME);
+    }
+
     function setPreviewContents(docMarkdownHtml) {
         $('#gdoc-markdown').html(docMarkdownHtml);
     }
@@ -19,5 +25,6 @@
     function displayError(error) {
         setPreviewContents('Was not able to render the markdown preview.');
     }
+    
 
 </script>
