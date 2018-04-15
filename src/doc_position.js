@@ -6,7 +6,7 @@
 function setDocCursor(elementIndex) {
     const doc = DocumentApp.getActiveDocument();
     const body = doc.getBody();
-    const element = findElementAtOffset(body, elementIndex);
+    const element = findElementAtIndex(body, elementIndex);
     if (element != null) {
         const position = doc.newPosition(element, 0);
         doc.setCursor(position);        
@@ -19,7 +19,7 @@ function setDocCursor(elementIndex) {
  * Finds the element in the Google Doc at the specified rendered
  * markdown node index.
  */
-function findElementAtOffset(body, elementIndex) {
+function findElementAtIndex(body, elementIndex) {
     var i = 0;
     var docTextSoFar = '';
     var nextCheckInLength = 100;
@@ -28,7 +28,7 @@ function findElementAtOffset(body, elementIndex) {
         var childText = paragraphs[i].getText();
         docTextSoFar += '\n' + childText;
         if (docTextSoFar.length > nextCheckInLength) {
-            var currentOffset = getCurrentOffset(docTextSoFar);
+            var currentOffset = getCurrentElementIndex(docTextSoFar);
             if (currentOffset >= elementIndex + 1) {
                 return paragraphs[i - 1];
             }
@@ -37,7 +37,7 @@ function findElementAtOffset(body, elementIndex) {
         }
         i += 1;
     }
-    var currentOffset = getCurrentOffset(docTextSoFar);
+    var currentOffset = getCurrentElementIndex(docTextSoFar);
     if (currentOffset >= elementIndex + 1) {
         return paragraphs[paragraphs.length - 1];
     }
@@ -61,7 +61,7 @@ function calculateNextCheckIn(currentOffset, desiredOffset, docLengthSoFar) {
  * 
  * This is an expensive call and should be used sparingly.
  */
-function getCurrentOffset(docTextSoFar) {
+function getCurrentElementIndex(docTextSoFar) {
     try {
         var markdownHtml = convertToMarkdownHtml(docTextSoFar);
         return countDirectNodes(markdownHtml);
