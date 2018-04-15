@@ -1,16 +1,23 @@
 <script>
+    const DOC_POLL_TIME = 1 * 1000; // in milliseconds
     $(function() {
-        google.script.run
-            .withSuccessHandler(rerenderSidebar)
-            .withFailureHandler(displayError)
-            .convertDocToMarkdown();
+        renderPreviewContents();
+        setInterval(renderPreviewContents, DOC_POLL_TIME);
     });
 
-    function rerenderSidebar(docMarkdownHtml) {
+    function renderPreviewContents() {
+        google.script.run
+            .withSuccessHandler(setPreviewContents)
+            .withFailureHandler(displayError)
+            .convertDocToMarkdown();
+    }
+
+    function setPreviewContents(docMarkdownHtml) {
         $('#gdoc-markdown').html(docMarkdownHtml);
     }
 
     function displayError(error) {
-        $('#gdoc-markdown').html('error');
+        setPreviewContents('Was not able to render the markdown preview.');
     }
+
 </script>
