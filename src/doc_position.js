@@ -1,3 +1,8 @@
+/**
+ * Sets the Document cursor to the specified rendered HTML node index.
+ * 
+ * elementIndex is the index of the node that was clicked in the sidebar.
+ */
 function setDocCursor(elementIndex) {
     const doc = DocumentApp.getActiveDocument();
     const body = doc.getBody();
@@ -10,6 +15,10 @@ function setDocCursor(elementIndex) {
     }
 }
 
+/**
+ * Finds the element in the Google Doc at the specified rendered
+ * markdown node index.
+ */
 function findElementAtOffset(body, elementIndex) {
     var i = 0;
     var docTextSoFar = '';
@@ -38,12 +47,22 @@ function findElementAtOffset(body, elementIndex) {
     return null;
 }
 
+/**
+ * Calculates the number of characters that must be read until
+ * the next markdown rendering and check in to see if the index
+ * has been reached.
+ */
 function calculateNextCheckIn(currentOffset, desiredOffset, docLengthSoFar) {
     const avgNodeLength = docLengthSoFar / currentOffset;
     return Math.floor(Math.max(desiredOffset - currentOffset, 0) * Math.min(avgNodeLength, 100));
 }
 
-
+/**
+ * Calculates the current index in the rendered markdown using the
+ * partial document text given.
+ * 
+ * This is an expensive call and should be used sparingly.
+ */
 function getCurrentOffset(docTextSoFar) {
     try {
         var markdownHtml = convertToMarkdownHtml(docTextSoFar);
@@ -53,6 +72,9 @@ function getCurrentOffset(docTextSoFar) {
     }
 }
 
+/**
+ * Calculates the number of direct (top-level) nodes in htmlStr.
+ */
 function countDirectNodes(htmlStr) {
     var count = 0;
     var stack = 0;
