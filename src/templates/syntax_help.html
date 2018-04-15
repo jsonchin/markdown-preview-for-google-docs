@@ -1,20 +1,5 @@
-<style>
-body { 
-    zoom: 0.7; 
-    -moz-transform: scale(3); 
-    -moz-transform-origin: 0 0;
-}
-
-.row {
-  display: flex; /* equal height of the children */
-}
-
-.col {
-  flex: 1; /* additionally, equal width */
-  padding-left: 1em;
-  padding-right: 1em;
-}
-</style>
+<?!= include('src/lib/picnic.css.html'); ?>
+<?!= include('src/css/syntax_help.css.html'); ?>
 
 <div id="syntax-guide">
     <p>
@@ -22,11 +7,8 @@ body {
     </p>
 </div>
 
-
-<?!= include('src/lib/picnic.css.html'); ?>
 <script src=" https://cdn.rawgit.com/showdownjs/showdown/
 1.8.6/dist/showdown.min.js"></script>
-
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
 <script>
