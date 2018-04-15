@@ -1,0 +1,16 @@
+<script>
+    $(function() {
+        google.script.run
+            .withSuccessHandler(rerenderSidebar)
+            .withFailureHandler(displayError)
+            .convertDocToMarkdown();
+    });
+
+    function rerenderSidebar(docMarkdownHtml) {
+        $('#gdoc-markdown').html(docMarkdownHtml);
+    }
+
+    function displayError(error) {
+        $('#gdoc-markdown').html('error');
+    }
+</script>
