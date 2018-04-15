@@ -25,6 +25,7 @@ function convertToMarkdownHtml(markdown) {
 function getConverter() {
   if (converter == null) {
     converter = new showdown.Converter();
+    converter.setFlavor('github');
   }
   return converter;
 }
