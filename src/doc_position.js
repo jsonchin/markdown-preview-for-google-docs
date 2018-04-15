@@ -22,14 +22,12 @@ function setDocCursor(elementIndex) {
 function findElementAtOffset(body, elementIndex) {
     var i = 0;
     var docTextSoFar = '';
-    var prevLength = 0;
     var nextCheckInLength = 100;
     const paragraphs = body.getParagraphs();
     while (i < paragraphs.length) {
         var childText = paragraphs[i].getText();
         docTextSoFar += '\n' + childText;
-        if (docTextSoFar.length > prevLength + nextCheckInLength) {
-            prevLength = docTextSoFar.length;
+        if (docTextSoFar.length > nextCheckInLength) {
             var currentOffset = getCurrentOffset(docTextSoFar);
             if (currentOffset >= elementIndex + 1) {
                 return paragraphs[i - 1];
@@ -54,7 +52,7 @@ function findElementAtOffset(body, elementIndex) {
  */
 function calculateNextCheckIn(currentOffset, desiredOffset, docLengthSoFar) {
     const avgNodeLength = docLengthSoFar / currentOffset;
-    return Math.floor(Math.max(desiredOffset - currentOffset, 0) * Math.min(avgNodeLength, 100));
+    return docLengthSoFar + Math.floor(Math.max(desiredOffset - currentOffset, 0) * Math.min(avgNodeLength, 100));
 }
 
 /**
