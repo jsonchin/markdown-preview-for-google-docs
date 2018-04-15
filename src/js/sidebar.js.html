@@ -7,6 +7,22 @@
         pollAndUpdatePreview();
     });
 
+    const root = $('#gdoc-markdown');
+    root.on('click', '*', function (e){
+        google.script.run.setDocCursor(getTopLevelNode($(this)).index());
+    });
+
+    
+    function getTopLevelNode(curNode) {
+        var parent = curNode.parent();
+
+        while (!curNode.is(root) && !parent.is(root)) {
+            curNode = parent;
+            parent = parent.parent();
+        }
+        return curNode;
+    }
+
     function renderPreviewContents() {
         google.script.run
             .withSuccessHandler(setPreviewContents)
