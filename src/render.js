@@ -1,7 +1,9 @@
+var SIDEBAR_NAME = 'Rendered Markdown Preview';
+
 function renderSidebar() {
   var template = HtmlService.createTemplateFromFile('src/templates/sidebar.html');
   var htmlOutput = template.evaluate();
-  htmlOutput.setTitle('Rendered Markdown');
+  htmlOutput.setTitle(SIDEBAR_NAME);
   return htmlOutput;
 }
 
