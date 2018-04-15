@@ -9,32 +9,19 @@
 
     const root = $('#gdoc-markdown');
     root.on('click', '*', function (e){
-        var html = root.html();
-        
-        var curNode = $(this);
+        google.script.run.setDocCursor(getTopLevelNode($(this)).index());
+    });
+
+    
+    function getTopLevelNode(curNode) {
         var parent = curNode.parent();
 
         while (!curNode.is(root) && !parent.is(root)) {
             curNode = parent;
             parent = parent.parent();
         }
-
-        var clickedNode = curNode;
-        var children = root.children();
-        var offset = 0;
-        var i;
-        var l = [];
-        for (i = 0; i < children.length; i+=1) {
-            if ($(children[i]).is(clickedNode)) {
-                google.script.run.setDocCursor(i);
-                break;
-            }
-            l.push(children[i].innerText.length);
-            offset += children[i].innerText.length;
-        }
-        console.log(l);
-        console.log(clickedNode.index());
-    });
+        return curNode;
+    }
 
     function renderPreviewContents() {
         google.script.run
