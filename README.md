@@ -20,7 +20,15 @@ There a few other options to markdown.
 
 For that reason, I built this add-on so I could use the tools that Google Docs provide (namely comments and being collaborative) while being able to view the markdown preview while I type.
 
+### Screenshots
+
+- A typical workflow.
+
 ![screenshot](readme-images/markdown-big-view-with-comments.png)
+
+- A helper window to display Github flavored markdown syntax.
+
+![screenshot](readme-images/markdown-syntax-guide.png)
 
 
 ### Resources
