@@ -1,14 +1,16 @@
 <html>
     <head>
-        <?!= include('src/lib/picnic.css.html'); ?>
+        <?!= include('src/lib/github.css.html'); ?>
+        <?!= include('src/lib/prettify.css.html'); ?>
         <?!= include('src/css/sidebar.css.html'); ?>
     </head>
 
     <body>
-        <div id="gdoc-markdown"></div>
+        <div id="gdoc-markdown" class="markdown-body"></div>
 
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
         <?!= include('src/js/sidebar.js.html'); ?>
+        <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/prettify.js"></script>
     </body>
 
 </html>
